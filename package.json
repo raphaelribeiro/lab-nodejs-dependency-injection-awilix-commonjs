@@ -1,0 +1,17 @@
+{
+  "name": "lab-nodejs-dependency-injection-awilix-commonjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Raphael Ribeiro",
+  "license": "ISC",
+  "dependencies": {
+    "awilix": "^10.0.2",
+    "awilix-express": "^9.0.1",
+    "express": "^4.19.2"
+  }
+}

@@ -1,3 +1,4 @@
-const server = require('./server.js');
+const container = require('./container');
+const server = container.resolve('server');
 
 server.start();

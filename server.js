@@ -1,15 +1,11 @@
 const express = require('express');
-const { scopePerRequest } = require('awilix-express');
 
-const container = require('./container.js')
-
-module.exports = ({
-  start: () => {    
+module.exports = ({ router, containerMiddleware }) => ({
+  start: () => {
     const app = express();
 
-    app.use(scopePerRequest(container));
-
-    app.get('/get', container.cradle.dependencyInjectionController.execute);
+    app.use(containerMiddleware);
+    app.use(router);
 
     app.listen(3000, () => {
       console.log('----- server ok!');

@@ -1,14 +1,21 @@
 const express = require('express');
 
-module.exports = ({ router, containerMiddleware }) => ({
-  start: () => {
+class Server {
+  constructor({ router, containerMiddleware }) {
+    this.router = router;
+    this.containerMiddleware = containerMiddleware;
+  }
+
+  start() {
     const app = express();
 
-    app.use(containerMiddleware);
-    app.use(router);
+    app.use(this.containerMiddleware);
+    app.use(this.router);
 
     app.listen(3000, () => {
       console.log('----- server ok!');
     });
   }
-});
+}
+
+module.exports = Server;

@@ -3,14 +3,19 @@ const { scopePerRequest } = require('awilix-express');
 
 const router = require('./router.js');
 const server = require('./server.js');
+const app = require('./app.js');
 
-const container = createContainer({
-  strict: true
+const container = createContainer();
+
+container.register({
+  router: asFunction(router),
+  server: asClass(server),
+  app: asClass(app),
+  containerMiddleware: asValue(scopePerRequest(container))
 });
 
 container.loadModules(
   [
-    './server.js',
     'src/controllers/*.js',
     'src/services/*.js',
     'src/repositories/*.js'
@@ -19,10 +24,5 @@ container.loadModules(
     formatName: 'camelCase'
   }
 );
-
-container.register({
-  router: asFunction(router),
-  containerMiddleware: asValue(scopePerRequest(container))
-});
 
 module.exports = container;
